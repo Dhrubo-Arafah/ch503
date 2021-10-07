@@ -1,6 +1,6 @@
 # TEAM DHAKA_HELPFUL_HEARTS (CH503)
 
-[![N|Solid](media/image/life.svg)](media/image/team.png)
+[![N|Solid](media/image/team.png)](media/image/team.png)
 
 ### Presenting Blood Sharing app
 
