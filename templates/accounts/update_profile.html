@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <form action="" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ user_form|crispy }}
+        {{ profile_form|crispy }}
+        <div class="mt-1">
+            <a href="{% url 'pass_change' %}" class="btn btn-outline-danger text-capitalize">
+                update password
+            </a>
+            <input type="submit" class="btn btn-danger" value={{ title }}>
+        </div>
+    </form>
+{% endblock %}

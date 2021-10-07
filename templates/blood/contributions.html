@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}My Contributions{% endblock %}
+{% block content %}
+
+    <table class="table" id="response-table">
+        <thead class="table-danger">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">No. of Bags</th>
+            <th scope="col">See Detail</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for response in responses %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ response.post.date }}</td>
+                <td>{{ response.bags }} bags</td>
+                <td>
+                    <a href="{% url 'cont_detail' response.id %}" class="btn btn-danger">Detail</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

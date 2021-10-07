@@ -1,0 +1,11 @@
+{% extends 'base/../base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Delete Post{% endblock %}
+{% block content %}
+<form action="" enctype="multipart/form-data" method="post">
+    {%csrf_token%}
+    {{form | crispy}}
+    <input type="reset" value="Reset" class="btn btn-outline-danger">
+    <input type="submit" value="Delete Post" class="btn btn-danger">
+</form>
+{% endblock %}

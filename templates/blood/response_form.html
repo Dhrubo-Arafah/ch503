@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Response{% endblock %}
+{% block content %}
+<form action="" enctype="multipart/form-data" method="post">
+    {%csrf_token%}
+    {{form | crispy}}
+    <a href="{% url 'index' %}" class="btn btn-outline-danger">Go back</a>
+    <input type="submit" value=Save class="btn btn-danger">
+</form>
+{% endblock %}

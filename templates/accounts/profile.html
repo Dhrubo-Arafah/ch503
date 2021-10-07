@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ user.username }}{% endblock %}
+{% block content %}
+    <div class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between mb-5">
+        <h1>Profile</h1>
+        {% if request.user == user %}
+            <div>
+                <a class="btn btn-outline-danger" href="{% url 'update_profile' %}">Update Profile</a>
+                <a href="{% url 'delete_account' %}" class="btn btn-danger">Delete Account</a>
+            </div>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-4 text-center card">
+            <div class="card-body">
+                {% if user.profile.profile_pic %}
+                    <img src="{{ user.profile.profile_pic.url }}" alt="image" class="img-thumbnail">
+                {% else %}
+                    <img src="http://dreamvilla.life/wp-content/uploads/2017/07/dummy-profile-pic.png" alt="dummy-image"
+                         class="img-fluid">
+                {% endif %}
+            </div>
+            <div class="card-footer"><h3>{{ user.username }}</h3></div>
+        </div>
+        <div class="col-12 col-md-8 col-lg-8">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Blood Group</th>
+                    <td>{{ user.profile.blood_group }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Date Joined</th>
+                    <td>{{ user.date_joined }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last Donated</th>
+                    <td>{{ response.post.date }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

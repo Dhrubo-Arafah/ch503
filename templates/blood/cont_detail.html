@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Thank You{% endblock %}
+{% block content %}
+    <h1 class="text-center text-uppercase">Thanks For Your</h1>
+    <h1 class="text-danger text-center fw-bold text-uppercase">Contribution</h1>
+    <hr class="w-25 mx-auto">
+    <div class="d-flex text-center w-50 mx-auto" style="border: 30px solid transparent;
+  padding: 15px;
+  border-image: url(https://www.w3schools.com/cssref/border.png) 30 round;">
+        <div class="w-100 mx-auto">
+            <h5 class="text-center">Proud member of </h5><img src="/media/image/life.svg" alt="Logo" width="80px"/>
+
+            <div class="my-2 text-center" style="" class="">{% if user.profile.profile_pic %}
+                <img src="{{ user.profile.profile_pic.url }}" alt="image" class="rounded-circle shadow" width="150px">
+            {% else %}
+                <img src="http://dreamvilla.life/wp-content/uploads/2017/07/dummy-profile-pic.png" alt="dummy-image"
+                     class="rounded-circle shadow" style="margin-bottom: -20px" width="200px">
+            {% endif %}
+                <br>
+                <img src="/media/image/medal.png" alt="Logo" width="40px"
+                     style=""/>
+            </div>
+            <div class="text-center w-100">
+                <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                <p>Donation Date: {{ response.post.date }}</p>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

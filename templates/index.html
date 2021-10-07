@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div>
+        <form class="d-flex shadow-sm p-2" method=POST action="/">
+            {% csrf_token %}
+            <input type="search" class="form-control me-2" name="thana"
+                   placeholder="Thana (Police Station/P.S)">
+            <input type="search" class="form-control me-2" name="blood_group"
+                   placeholder="Blood Group">
+
+            <button type="submit" class="btn btn-danger ms-2">Search</button>
+        </form>
+        {% for post in posts %}
+            <div class="shadow-sm p-4 rounded mt-3 pt-0">
+                <div class="row d-flex align-items-center h-25 m-0">
+                    <div class="col-8 d-flex mt-2">
+                        <img src="{{ post.user.profile.profile_pic.url }}" alt="img" class="rounded-circle me-2"
+                             style="height: 60px; width:60px">
+                        <div>
+                            <a href="{% url 'profile' post.user.id %}"
+                               class="text-decoration-none text-dark">{{ post.user.first_name }} {{ post.user.last_name }}
+                                <i class="fas fa-link"></i></a>
+                            <p> {{ post.date_updated }}</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        {% if post.user == request.user %}
+                            <a href="{% url 'update_post' post.id %}"
+                               class="btn btn-danger btn-sm h-50 border-0 float-end">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a href="{% url 'delete_post' post.id %}"
+                               class="btn btn-danger btn-sm h-50 float-end me-1">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                            <a href="{% url 'show_response' post.id %}" type="button"
+                               class="btn btn-danger btn-sm h-50 float-end me-1">
+                                <i class="fas fa-file-medical"></i> &nbsp;Show Responses
+                            </a>
+                        {% else %}
+                            <a href="{% url 'view_post' post.id %}"
+                                   class="btn btn-danger btn-sm h-50 float-end me-1">
+                                    <i class="fas fa-file-medical"></i> &nbsp;See Details
+                                </a>
+                            {% if post.id in response_list %}
+                                <a href="{% url 'remove_response' post.id %}"
+                                   class="btn btn-danger btn-sm h-50 float-end me-1">
+                                    <i class="fas fa-file-medical"></i> &nbsp;Responded
+                                </a>
+                            {% else %}
+                                <a href="{% url 'add_response' post.id %}"
+                                   class="btn btn-outline-danger btn-sm h-50 float-end me-1">
+                                    <i class="fas fa-file-medical"></i> &nbsp;Response
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                        {% if request.user == superuser %}
+                            <a href="{% url 'delete_post' post.id %}" class="btn btn-danger btn-sm h-50 float-end"><i
+                                    class="fas fa-trash-alt"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row border rounded-pill p-2 d-flex justify-content-between">
+                    {% if post.blood_managed %}
+                        <div class="col-auto bg-danger text-white rounded-pill text-uppercase">Managed</div>
+                    {% endif %}
+                    {% if post.urgent %}
+                        <div class="col-auto bg-danger text-white rounded-pill text-uppercase">Urgent</div>
+                    {% endif %}
+                    <div class="col-auto"><i class="far fa-calendar-alt"></i>&nbsp;{{ post.date }}</div>
+                    <div class="col-auto"><i class="far fa-clock"></i>&nbsp;{{ post.time }}</div>
+                    <div class="col-auto bg-danger text-white rounded-pill text-uppercase">{{ post.need_type }} <i class="fas fa-tint"></i>&nbsp;{{ post.blood_group }}
+                    </div>
+                    <div class="col-auto"><i class="fas fa-fill-drip"></i>&nbsp;{{ post.amount }}&nbsp;bags</div>
+                </div>
+                <div class="row border rounded p-2 mt-2">
+                    <div class="col-11"><i class="fas fa-map-marker-alt"></i>&nbsp;{{ post.location }}, {{ post.thana }}
+                    </div>
+                    <div class="col-1"><a href="{{ post.map_link }}" class="btn btn-danger btn-sm rounded-pill"
+                                          target="_blank" title="Google Map"><i class="far fa-map"></i></a></div>
+                </div>
+                <div class="row border rounded mt-2 p-2">
+                    <div class="col-12"><i class="far fa-clipboard"></i>&nbsp;{{ post.short_note }}</div>
+                </div>
+
+            </div>
+
+        {% endfor %}
+        {% if posts.has_other_pages %}
+            <ul class="pagination mt-5 d-flex h-25 align-items-center">
+                {% if posts.has_previous %}
+                    <li><a href="?page={{ posts.previous_page_number }}" class="me-2 text-danger"><i
+                            class="fas fa-chevron-left"></i></a></li>
+                {% else %}
+                    <li class="disabled me-2"><span><i class="fas fa-chevron-left"></i></span></li>
+                {% endif %}
+                {% for i in posts.paginator.page_range %}
+                    {% if posts.number == i %}
+                        <li class="active btn btn-danger"><span>{{ i }} <span class="sr-only">(current)</span></span>
+                        </li>
+                    {% else %}
+                        <li><a href="?page={{ i }}" class="btn btn-light">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if posts.has_next %}
+                    <li><a href="?page={{ posts.next_page_number }}" class="text-danger ms-2"><i
+                            class="fas fa-chevron-right"></i></a></li>
+                {% else %}
+                    <li class="disabled ms-2"><span><i class="fas fa-chevron-right"></i></span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+    </div>
+
+{% endblock %}

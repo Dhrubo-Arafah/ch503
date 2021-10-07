@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load social_share %}
+{% block title %}Responses{% endblock %}
+{% block content %}
+    <div class="mb-3 border py-2 px-3">
+        <div class="row border rounded-pill p-2 d-flex justify-content-between">
+            {% if post.blood_managed %}
+                <div class="col-auto bg-danger text-white rounded-pill text-uppercase">Managed</div>
+            {% endif %}
+            {% if post.urgent %}
+                <div class="col-auto bg-danger text-white rounded-pill text-uppercase ">Urgent</div>
+            {% endif %}
+            <div class="col-auto"><i class="far fa-calendar-alt"></i>&nbsp;{{ post.date }}</div>
+            <div class="col-auto"><i class="far fa-clock"></i>&nbsp;{{ post.time }}</div>
+            <div class="col-auto"><i class="fas fa-tint"></i>&nbsp;{{ post.blood_group }}</div>
+            <div class="col-auto"><i class="fas fa-fill-drip"></i>&nbsp;Need {{ post.amount }}&nbsp;bags</div>
+            {% if request.user == post.user %}
+                <div class="col-auto"><i class="fas fa-fill-drip"></i>&nbsp;Raised {{ total_bags }}&nbsp;bags</div>
+            {% else %}
+                <a href="{% url 'add_response' post.id %}"
+                   class="btn btn-outline-danger btn-sm h-50 float-end me-1">
+                    <i class="fas fa-file-medical"></i> &nbsp;Response
+                </a>
+            {% endif %}
+            <div class="col-auto">
+                {% post_to_facebook object_or_url "<button class='btn btn-outline-danger'><i class='fab fa-facebook-f'>&nbsp;</i>Share</button>" %}
+            </div>
+        </div>
+        <div class="row border rounded p-2 mt-2">
+            <div class="col-11"><i class="fas fa-map-marker-alt"></i>&nbsp;{{ post.location }}</div>
+            <div class="col-1"><a href="{{ post.map_link }}" class="btn btn-danger btn-sm rounded-pill"
+                                  target="_blank" title="Google Map"><i class="far fa-map"></i></a></div>
+        </div>
+        <div class="row border rounded mt-2 p-2">
+            <div class="col-12"><i class="far fa-clipboard"></i>&nbsp;{{ post.short_note }}</div>
+        </div>
+    </div>
+    {% if request.user == post.user %}
+        <table class="table" id="response-table">
+            <thead class="table-danger">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Donor</th>
+                <th scope="col">No. of Bags</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for response in responses %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><a href="{% url 'profile' response.donor.id %}"
+                           class="text-decoration-none fw-bold text-dark">{{ response.donor }}</a></td>
+                    <td>{{ response.bags }} bags</td>
+                    <td>
+                        {% if response.approve %}
+                            <a href="{% url 'approval' response.id response.post.id %}" class="btn btn-danger">Disapprove</a>
+                        {% else %}
+                            <a href="{% url 'approval' response.id response.post.id %}" class="btn btn-outline-danger">Approve</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="">
+            <a href="{% url 'update_post' post.id %}"
+               class="btn btn-danger">
+                <i class="fas fa-pencil-alt"></i> Update
+            </a>
+            <a href="{% url 'delete_post' post.id %}"
+               class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Delete
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}

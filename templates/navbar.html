@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-5">
+    <div class="container">
+        <a class="fs-2 me-5 text-dark" data-bs-toggle="offcanvas" href="#offcanvasWithBothOptions" role="button"
+           aria-controls="offcanvasExample">
+            <i class="fas fa-bars"></i>
+        </a>
+        <a class="navbar-brand" href="{% url 'index' %}"><img
+                src="/media/image/life.svg" alt="Logo" width="80px"/></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex w-100 mx-auto" method=POST action="/search-result">
+                {% csrf_token %}
+                <input class="form-control w-50" type="search" placeholder="Donor's Location" aria-label="Search"
+                       name="location">
+                <input class="form-control ms-2 me-2 w-50" type="search" placeholder="Donor's Blood Group" aria-label="Search"
+                       name="blood_group">
+                <button class="btn btn-danger" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if request.user.is_authenticated %}
+                            {{ request.user }}
+                        {% else %}
+                            Guest User
+                        {% endif %}
+
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% if request.user.is_authenticated %}
+                            <li class="dropdown-item">
+                                <a class="nav-link text-dark" href="{% url 'profile' request.user.id %}"><i
+                                        class="far fa-user-circle text-danger"></i> Profile</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="nav-link text-dark" href="{% url 'logout' %}"><i
+                                        class="fas fa-sign-in-alt text-danger"></i> Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="dropdown-item">
+                                <a class="nav-link text-dark" href="{% url 'register' %}"><i
+                                        class="fas fa-user-plus text-danger"></i> Register</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="nav-link text-dark" href="{% url 'login' %}"><i
+                                        class="fas fa-sign-in-alt text-danger"></i> Login</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+             aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"><a class="navbar-brand"
+                                                                                  href="{% url 'index' %}"><img
+                        src="/media/image/life.svg" alt="Logo" width="80px"/></a></h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="navbar-nav d-flex flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="{% url 'create_post' %}"><i
+                                class="fas fa-plus-circle text-danger"></i> Create A Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="{% url 'my_posts' %}"><i
+                                class="far fa-file-alt text-danger"></i>&nbsp; My Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="{% url 'contributions' %}"><i
+                                class="far fa-flag text-danger"></i> My Contributions</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

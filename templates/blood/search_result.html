@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Responses{% endblock %}
+{% block content %}
+    {% if search %}
+<p>You searched for {{ search }}</p>
+        <table class="table" id="response-table">
+        <thead class="table-danger">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Blood Group</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for result in results %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="{% url 'profile' result.user.id %}" class="text-decoration-none fw-bold text-dark">{{ result.user }}</a></td>
+                <td>{{ result.blood_group }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}
