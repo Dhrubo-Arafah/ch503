@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Community{% endblock %}
+{% block content %}
+    <div class="shadow-sm row row-cols-1 row-cols-md-2">
+        <div class="col">
+            <img src="/media/{{ community.banner }}" alt="{{ community.name }}" class="img-fluid">
+        </div>
+        <div class="col">
+            <h5>{{ community.name }}</h5>
+            <h6>FB Group<a href="{{ community.fb_group }}" class="btn btn-outline-danger">FB Group</a></h6>
+            <h6>Total Requests: {{ requests.count }}</h6>
+
+            <a href="{% url 'update_community' community.id %}" class="btn btn-outline-danger">Update Community</a>
+        </div>
+    </div>
+<table class="table" id="response-table">
+            <thead class="table-danger">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Seeker</th>
+                <th scope="col">Location</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for req in requests %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><a href="{% url 'profile' req.user.id %}"
+                           class="text-decoration-none fw-bold text-dark">{{ req.user.username }}</a></td>
+                    <td><a href="{% url 'view_post' req.post.id %}" class="text-decoration-none text-dark">{{ req.post.location }} <i class="fas fa-link"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

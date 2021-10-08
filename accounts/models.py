@@ -8,4 +8,4 @@ class Profile(models.Model):
     blood_group = models.CharField(max_length=3)
     location = models.CharField(max_length=55)
     isDonor = models.BooleanField(default=False, blank=True)
-    profile_pic = models.ImageField(upload_to='image/')
+    profile_pic = models.ImageField(upload_to='profile/')

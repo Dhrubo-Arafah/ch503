@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blood',
     'crispy_forms',
     'django_social_share',
+    'community'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

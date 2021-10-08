@@ -42,9 +42,3 @@ class Donation(models.Model):
     donor = models.ForeignKey(User, on_delete=models.CASCADE)
     bags = models.IntegerField()
     approve = models.BooleanField(blank=True, default=False)
-
-class Community(models.Model):
-    Creator=models.ForeignKey(Post, on_delete=models.CASCADE)
-    name=models.CharField(max_length=35)
-    members=models.IntegerField()
-

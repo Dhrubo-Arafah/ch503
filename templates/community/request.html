@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Request to Community{% endblock %}
+{% block content %}
+<form method="post">
+    {%csrf_token%}
+    {% for field in form %}
+        {{ field}}
+    {% endfor %}
+{#    {{form | crispy}}#}
+    <input type="reset" value="Reset" class="btn btn-outline-danger">
+    <input type="submit" value="Request" class="btn btn-danger">
+</form>
+{% endblock %}

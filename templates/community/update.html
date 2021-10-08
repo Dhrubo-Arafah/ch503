@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Update Community{% endblock %}
+{% block content %}
+<form action="" enctype="multipart/form-data" method="post">
+    {%csrf_token%}
+    {{form | crispy}}
+    <input type="reset" value="Reset" class="btn btn-outline-danger">
+    <input type="submit" value=Update class="btn btn-danger">
+</form>
+{% endblock %}
