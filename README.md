@@ -34,3 +34,13 @@
 - Get rewards after successful donations
 - Share banners in social media
 ```
+
+### Features (Community Admin)
+```
+- Authentication
+- Create Blood Donation Community 
+- Update Donation Community
+- get requests from blood seekers
+- responses to the posts
+- Share the post social media/admin's blood donation community
+```
