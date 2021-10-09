@@ -1,9 +1,9 @@
 # CTO FORUM INNOVATION HACKATHON
-# TEAM DHAKA_HELPFUL_HEARTS (CH503)
-# Challange: Good Health and Well Being
+## TEAM DHAKA_HELPFUL_HEARTS (CH503)
+## Challange: Good Health and Well Being
 [![N|Solid](media/image/team.png)](media/image/team.png)
 
-### Presenting Blood Sharing app
+# Presenting Blood Sharing app
 
 [![N|Solid](media/image/life.svg)](media/image/life.svg)
 
@@ -43,4 +43,14 @@
 - get requests from blood seekers
 - responses to the posts
 - Share the post social media/admin's blood donation community
+```
+###Through our app, we are solving blood seekers issues:
+```
+-Getting information of nearby blood donors
+-Engaging blood donors as soon as possible
+-Safe blood with no fees
+-No fees for our platform usage
+-Minimizing dependency on hospitals and blood bank
+-Reliable and large community
+-Getting information of other blood sharing communities
 ```
