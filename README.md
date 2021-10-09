@@ -44,7 +44,7 @@
 - responses to the posts
 - Share the post social media/admin's blood donation community
 ```
-###Through our app, we are solving blood seekers issues:
+### Through our app, we are solving blood seekers issues:
 ```
 -Getting information of nearby blood donors
 -Engaging blood donors as soon as possible
