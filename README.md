@@ -45,12 +45,12 @@
 - Share the post social media/admin's blood donation community
 ```
 ### Through our app, we are solving blood seekers issues:
-```
--Getting information of nearby blood donors
--Engaging blood donors as soon as possible
--Safe blood with no fees
--No fees for our platform usage
--Minimizing dependency on hospitals and blood bank
--Reliable and large community
--Getting information of other blood sharing communities
+```ssh
+- Getting information of nearby blood donors
+- Engaging blood donors as soon as possible
+- Safe blood with no fees
+- No fees for our platform usage
+- Minimizing dependency on hospitals and blood bank
+- Reliable and large community
+- Getting information of other blood sharing communities
 ```
